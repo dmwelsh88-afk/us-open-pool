@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: us-open-pool
+    runtime: node
+    plan: starter
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATA_DIR
+        value: /var/data
+      - key: ADMIN_PASSWORD
+        sync: false
+    disk:
+      name: pool-data
+      mountPath: /var/data
+      sizeGB: 1
