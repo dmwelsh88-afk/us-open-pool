@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>U.S. Open Pool</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main class="app">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">126th U.S. Open · Shinnecock Hills</p>
+          <h1>Pool Leaderboard</h1>
+        </div>
+        <div class="status">
+          <span id="connectionDot" class="dot"></span>
+          <span id="updatedAt">Loading</span>
+        </div>
+      </header>
+
+      <nav class="tabs" aria-label="Pool sections">
+        <button class="tab is-active" data-tab="leaderboard">Leaderboard</button>
+        <button class="tab" data-tab="submit">Submit Picks</button>
+        <button class="tab" data-tab="admin">Admin</button>
+      </nav>
+
+      <section id="leaderboard" class="panel is-active">
+        <div class="summary-grid">
+          <div>
+            <span class="metric" id="entryCount">0</span>
+            <span class="label">entries</span>
+          </div>
+          <div>
+            <span class="metric" id="potAmount">$0</span>
+            <span class="label">pot</span>
+          </div>
+          <div>
+            <span class="metric">Best 4</span>
+            <span class="label">scores count</span>
+          </div>
+        </div>
+        <div id="leaderboardRows" class="leaderboard"></div>
+      </section>
+
+      <section id="submit" class="panel">
+        <form id="entryForm" class="entry-form">
+          <div class="form-row">
+            <label>
+              Your name
+              <input name="name" autocomplete="name" required />
+            </label>
+            <label>
+              Venmo name
+              <input name="venmo" placeholder="@handle" />
+            </label>
+          </div>
+          <div id="pickGroups" class="pick-groups"></div>
+          <div class="actions">
+            <button type="submit">Submit entry</button>
+            <span id="entryMessage" class="message"></span>
+          </div>
+        </form>
+      </section>
+
+      <section id="admin" class="panel">
+        <div class="admin-auth">
+          <label>
+            Admin password
+            <input id="adminPassword" type="password" autocomplete="current-password" placeholder="Required to save scores or edit entries" />
+          </label>
+          <button id="saveAdminPassword" type="button">Unlock admin</button>
+          <button id="clearAdminPassword" type="button" class="secondary">Clear</button>
+        </div>
+        <div class="admin-layout">
+          <div>
+            <h2>Scores</h2>
+            <p class="muted">Enter round scores relative to par. Mark MC to add +10 for Saturday and Sunday when those rounds are blank.</p>
+            <div class="score-tools">
+              <input id="scoreSearch" placeholder="Search golfers" />
+              <button id="saveVisibleScores">Save visible scores</button>
+            </div>
+            <div id="scoreEditor" class="score-editor"></div>
+          </div>
+          <aside>
+            <h2>Entries</h2>
+            <div id="adminEntries" class="admin-entries"></div>
+            <h2>CSV import</h2>
+            <p class="muted">Columns: golfer,r1,r2,r3,r4,status,finish</p>
+            <textarea id="csvImport" rows="8" spellcheck="false"></textarea>
+            <button id="importCsv">Import scores</button>
+            <span id="adminMessage" class="message"></span>
+          </aside>
+        </div>
+      </section>
+    </main>
+
+    <template id="pickGroupTemplate">
+      <fieldset class="pick-group">
+        <legend></legend>
+        <div class="pick-count"></div>
+        <div class="golfer-list"></div>
+      </fieldset>
+    </template>
+
+    <script src="/app.js"></script>
+  </body>
+</html>
